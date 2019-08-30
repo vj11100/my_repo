@@ -1,0 +1,54 @@
+def display_board():
+    print('|'+ board['0,0'] +'|'+board['1,0']+'|'+board['2,0']+'|')
+    print('|'+ board['0,1'] +'|'+board['1,1']+'|'+board['2,1']+'|')
+    print('|'+ board['0,2'] +'|'+board['1,2']+'|'+board['2,2']+'|')
+def win_or_not():
+    if board['0,0']==board['0,1']==board['0,2']==entity or board['1,0']==board['1,1']==board['1,2']==entity or board['2,0']==board['2,1']==board['2,2']==entity or board['0,0']==board['1,0']==board['2,0']==entity or board['0,1']==board['1,1']==board['2,1']==entity or board['0,2']==board['1,2']==board['2,2']==entity or board['0,0']==board['1,1']==board['2,2']==entity or board['0,2']==board['1,1']==board['2,0']==entity :
+        return 1
+board={'0,0':' ','0,1':' ','0,2':' ','1,0':' ','1,1':' ','1,2':' ','2,0':' ','2,1':' ','2,2':' '}
+print('this is the plain board')
+display_board()
+print('rules of the game:')
+print('enter proper coordinates input:- only the x,y type of input accepted. improper input entered results in the skipping of that turn ')
+print('do not over-write moves. that would automatically result in the skipping of turn for O and repeat for X')
+print('press y after even turns so as to quit the game.')
+print('enjoy!! ;)')
+while 1==1:
+    
+    try:
+        print('player X enter coordinates')
+        coordinates=input()
+        if board[coordinates]!=' ':
+            print('illegal move!')
+            continue
+    except:
+        print('enter proper input!')
+    board[coordinates]='X'
+    display_board()
+    entity='X'
+    if win_or_not():
+        print('X won the game!')
+        break
+    try:
+        print('player Y enter coordinates')
+        coordinates=input()
+        if board[coordinates]!=' ':
+            print('illegal move!')
+            continue
+    except:
+        print('enter proper input!')
+    board[coordinates]='O'
+    display_board()
+    entity='O'
+    if win_or_not():
+        print('Y won the game!')
+        break
+    print('do you want to quit? y/n')
+    quit=input()
+    if quit=='y' :
+        break
+    
+        
+    
+    
+    
