@@ -1,0 +1,134 @@
+#include<iostream>
+#include<vector>
+#include<windows.h>
+using namespace std;
+const char x='X';
+const char o='O';
+const char empty_space=' ';
+int turn=0;
+char entity;
+int score_x=0;
+int n;
+int score_y=0;
+vector<char>board(9,empty_space);
+void clear(void);
+void SetColor(int value)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),  value);
+}
+void brd()
+{
+	SetColor(6);
+cout << "\n\t" << board[0] << " | " << board[1] << " | " << board[2];
+cout << "\n\t" << "----------";
+cout << "\n\t" << board[3] << " | " << board[4] << " | " << board[5];
+cout << "\n\t" << "----------";
+cout << "\n\t" << board[6] << " | " << board[7] << " | " << board[8];
+cout << "\n\n";
+SetColor(2);
+cout <<"\n\t"<<"score x: "<<score_x<<"\t score y: "<<score_y<<endl;
+cout<<"\t\t"<<endl;
+}
+int winning_condition()
+{
+if ((board[0]==entity && board[1]==entity && board[2]==entity) ||	(board[3]==entity && board[4]==entity && board[5]==entity) ||(board[6]==entity && board[7]==entity && board[8]==entity) ||(board[0]==entity && board[3]==entity && board[6]==entity) ||(board[1]==entity && board[4]==entity && board[7]==entity) ||(board[2]==entity && board[5]==entity && board[8]==entity) ||(board[0]==entity && board[4]==entity && board[8]==entity) ||(board[2]==entity && board[4]==entity && board[6]==entity))
+return 1;
+}
+void read_x()
+{
+	SetColor(4);
+	while(1)
+	{
+	cout<<"enter x position 1-9"<<endl;
+		cin>>n;
+		if(board[n-1]!=' ')
+		{
+			if(n>9)
+			cout<<"enter a number between 1 and 9 only!"<<endl;
+			else
+		    cout<<"illegal move, entity already present!"<<endl;
+		continue;
+	}
+	break;
+}
+}
+void read_o()
+{
+	SetColor(3);
+	while(1)
+	{
+	cout<<"enter O position 1-9"<<endl;
+		cin>>n;
+		if(board[n-1]!=' ')
+		{
+			if(n>9)
+			cout<<"enter a number between 1 and 9 only!"<<endl;
+			else
+			cout<<"illegal move, entity already present!"<<endl;
+		continue;
+		}
+		break;
+	}
+}
+void game()
+{
+	brd();
+	turn=0;
+	while(1)
+	{
+		entity=x;
+		read_x();                    ///
+		board[n-1]=x;                                   
+		brd();
+		if(winning_condition())
+		{
+		cout<<"x won the game!"<<endl;
+		score_x+=10;
+		clear();
+		break;
+	}
+        turn++;
+		entity=o;
+		read_o();
+		board[n-1]=o;                                       
+		brd();
+		if(winning_condition())
+		{
+		cout<<"O won the game!"<<endl;
+		score_y+=10;
+		clear();
+		break;
+	}
+}
+}
+void clear()
+{
+	for(int i=0;i<8;i++)
+	board[i]=' ';
+}	
+main()
+{
+	char decide;
+	cout<<"this is the board"<<endl;
+	while(1)
+	{
+	game();
+	cout<<"do you wanna continue? y/n"<<endl;
+	cin>>decide;
+	if(decide=='y')
+	{ 
+	continue;
+}
+	if(decide=='n')
+	break;
+}
+SetColor(1);
+cout<<"the final score is: x= "<<score_x<<" y= "<<score_y<<endl;
+if(score_x>score_y)
+cout<<"X WON"<<endl;
+else if(score_x<score_y)
+cout<<" Y WON"<<endl;
+else
+cout<<"tie"<<endl;
+}
+	
